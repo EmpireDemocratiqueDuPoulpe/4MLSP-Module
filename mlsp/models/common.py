@@ -7,6 +7,24 @@ from colorama import Fore, Style
 from sklearn import metrics
 
 
+def process_model(model, x_train, y_train, x_test, y_test, verbose=False):
+    model.fit(x_train, y_train)
+    prediction = model.predict(x_test)
+
+    if verbose:
+        print_confusion_matrix(y_test, prediction)
+        print_classification_rprt(y_test, prediction)
+
+    # Return the best model
+    acc_score, train_score, test_score = print_score(
+        model,
+        x_train=x_train, y_train=y_train,
+        x_test=x_test, y_test=y_test,
+        prediction=prediction
+    )
+    return model, {"accuracy_score": acc_score, "train_score": train_score, "test_score": test_score}
+
+
 def print_confusion_matrix(y_test, prediction):
     print(f"Confusion matrix: {Fore.LIGHTGREEN_EX}{metrics.confusion_matrix(y_test, prediction)}")
 

@@ -1,5 +1,5 @@
 # #################################################################################################################### #
-#       knn.py                                                                                                         #
+#       neighbors.py                                                                                                   #
 #           Models based on nearest neighbors analysis.                                                                #
 # #################################################################################################################### #
 
@@ -11,7 +11,7 @@ from sklearn.pipeline import Pipeline
 from . import common
 
 
-def find_best_model(preprocessor, x_train, y_train, x_test, y_test, range_min=1, range_max=15, verbose=False):
+def k_neighbors_model(preprocessor, x_train, y_train, x_test, y_test, range_min=1, range_max=15, verbose=False):
     models_list = []
     scores_list = []
 
@@ -22,7 +22,7 @@ def find_best_model(preprocessor, x_train, y_train, x_test, y_test, range_min=1,
     for k in k_range:
         classifier = Pipeline(steps=[
             ("preprocessor", preprocessor),
-            ("knn", KNeighborsClassifier(n_neighbors=k))
+            ("k_neighbors", KNeighborsClassifier(n_neighbors=k))
         ])
         classifier.fit(x_train, y_train)
         models_list.append(classifier)

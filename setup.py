@@ -7,7 +7,7 @@ setuptools.setup(
     url="https://www.youtube.com/watch?v=yebo5ILBMC0",
     author="Empire Démocratique du Poulpe",
     author_email="alexis.lecomte@supinfo.com",
-    install_requires=["colorama", "pandas", "matplotlib", "scikit-learn"],
+    install_requires=["colorama", "pandas", "matplotlib", "scikit-learn", "mixed-naive-bayes"],
     packages=setuptools.find_packages(),
     zip_safe=False
 )

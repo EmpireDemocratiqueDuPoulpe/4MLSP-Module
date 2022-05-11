@@ -7,12 +7,12 @@ from matplotlib import pyplot
 from sklearn import metrics
 
 
-def roc_curve(model, x_test, y_test):
+def roc_curve(model, x_test, y_test, name=""):
     prediction = model.predict(x_test)
     fpr, tpr, threshold = metrics.roc_curve(y_test, prediction)
     roc_auc = metrics.auc(fpr, tpr)
 
-    pyplot.title("Receiver Operating Characteristic (ROC)")
+    pyplot.title(f"Receiver Operating Characteristic (ROC){f' - {name}' if name else ''}")
     pyplot.plot(fpr, tpr, "b", label="AUC = %0.2f" % roc_auc)
     pyplot.legend(loc="lower right")
     pyplot.plot([0, 1], [0, 1], "r--")
