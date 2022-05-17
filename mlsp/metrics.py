@@ -27,3 +27,20 @@ def precision_recall_curve(model, x_test, y_test, name):
     prd = metrics.PrecisionRecallDisplay.from_estimator(model, x_test, y_test, name=name)
     prd.ax_.set_title("2-class Precision-Recall curve")
     pyplot.show()
+
+
+def confusion_matrix_from_predictions(y_test, y_pred):
+    cm = metrics.ConfusionMatrixDisplay.from_predictions(y_true=y_test, y_pred=y_pred, normalize="true")
+    _plot_confusion_matrix(cm)
+
+
+def confusion_matrix_from_estimator(model, x_test, y_test):
+    cm = metrics.ConfusionMatrixDisplay.from_estimator(estimator=model, X=x_test, y=y_test, normalize="true")
+    _plot_confusion_matrix(cm)
+
+
+# For some reason, this function plot a double confusion matrix.
+# This is a confusion.
+def _plot_confusion_matrix(matrix):
+    matrix.plot()
+    pyplot.show()
