@@ -6,7 +6,7 @@
 from colorama import Fore, Style
 from matplotlib import pyplot
 from sklearn import metrics
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
 from sklearn.pipeline import Pipeline
 from . import common
 
@@ -55,3 +55,12 @@ def k_neighbors_model(preprocessor, x_train, y_train, x_test, y_test, range_min=
     )
 
     return model, {"accuracy_score": acc_score, "train_score": train_score, "test_score": test_score}
+
+
+def k_neighbors_regressor(preprocessor, x_train, y_train, x_test, y_test, n_neighbors=5, verbose=False):
+    model = Pipeline(steps=[
+        ("preprocessor", preprocessor),
+        ("linear_regression", KNeighborsRegressor(n_neighbors=n_neighbors))
+    ])
+
+    return common.process_regression_model(model, x_train=x_train, y_train=y_train, x_test=x_test, y_test=y_test, verbose=verbose)
