@@ -3,6 +3,7 @@
 #           Common functions used by other functions in this folder.                                                   #
 # #################################################################################################################### #
 
+import warnings
 from colorama import Fore, Style
 import numpy
 from sklearn import metrics
@@ -76,7 +77,16 @@ def print_regression_score(model, x_train, y_train, x_test, y_test, prediction=N
     mae = round(metrics.mean_absolute_error(y_true=y_test, y_pred=prediction), 3)
     rmse = round(numpy.sqrt(metrics.mean_squared_error(y_true=y_test, y_pred=prediction)), 3)
     mape = round(metrics.mean_absolute_percentage_error(y_true=y_test, y_pred=prediction) * 100, 3)
-    statistic, pvalue = scipy.stats.shapiro(prediction - y_test)
+
+    with warnings.catch_warnings():
+        warnings.filterwarnings("error")
+
+        try:
+            statistic, pvalue = scipy.stats.shapiro(prediction - y_test)
+        except UserWarning as warn:
+            print(f"{Fore.YELLOW}Warning: {warn}")
+            warnings.filterwarnings("ignore")
+            statistic, pvalue = scipy.stats.shapiro(prediction - y_test)
 
     print((
         f"Best achieved accuracy:"
