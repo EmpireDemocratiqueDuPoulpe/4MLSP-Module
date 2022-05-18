@@ -11,6 +11,7 @@ def best_model(model, search, x_train, y_train, x_test, y_test, train_score=None
     test_score = test_score if test_score else round(model.score(x_test, y_test) * 100, 2)
 
     search.fit(x_train, y_train)
+    print(f"Best params for model: {Fore.LIGHTGREEN_EX}{search.best_params_}")
     new_model = search.best_estimator_
 
     new_train_score = round(new_model.score(x_train, y_train) * 100, 2)
