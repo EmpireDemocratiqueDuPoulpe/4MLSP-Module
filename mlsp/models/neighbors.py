@@ -60,7 +60,7 @@ def k_neighbors_model(preprocessor, x_train, y_train, x_test, y_test, range_min=
 def k_neighbors_regressor(preprocessor, x_train, y_train, x_test, y_test, n_neighbors=5, verbose=False):
     model = Pipeline(steps=[
         ("preprocessor", preprocessor),
-        ("linear_regression", KNeighborsRegressor(n_neighbors=n_neighbors))
+        ("k_neighbors_regressor", KNeighborsRegressor(n_neighbors=n_neighbors))
     ])
 
     return common.process_regression_model(model, x_train=x_train, y_train=y_train, x_test=x_test, y_test=y_test, verbose=verbose)
