@@ -8,4 +8,4 @@ from . import metrics
 from . import misc
 from . import search
 from . import text
-from .models import discriminant_analysis, ensemble, linear_model, naive_bayes, neighbors, svm, tree
+from .models import common, discriminant_analysis, ensemble, linear_model, naive_bayes, neighbors, svm, tree
