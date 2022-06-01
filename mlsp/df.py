@@ -15,7 +15,7 @@ def first_look(df):
 
 def missing_values(df):
     data_count = df.shape[0] * df.shape[1]
-    missing = df.isna().sum()
+    missing = df.isna().sum().sort_values(ascending=False)
 
     print((
         f"Missing values: {Fore.LIGHTGREEN_EX}{round((missing.sum() / data_count) * 100, 2)}%\n"
