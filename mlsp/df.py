@@ -28,9 +28,13 @@ def missing_values(df, keep_zeros=True):
     ))
 
 
-def split_train_test(df, y_label, test_size=0.20):
-    data_x = df.drop([y_label], axis=1)
-    data_y = df[y_label]
+def split_train_test(df, y_label=None, test_size=0.20):
+    if y_label is not None:
+        data_x = df.drop([y_label], axis=1)
+        data_y = df[y_label]
 
-    x_train, x_test, y_train, y_test = train_test_split(data_x, data_y, test_size=test_size)
+        x_train, x_test, y_train, y_test = train_test_split(data_x, data_y, test_size=test_size)
+    else:
+        x_train, x_test, y_train, y_test = train_test_split(df, test_size=test_size)
+
     return x_train, x_test, y_train, y_test
