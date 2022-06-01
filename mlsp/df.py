@@ -34,7 +34,7 @@ def split_train_test(df, y_label=None, test_size=0.20):
         data_y = df[y_label]
 
         x_train, x_test, y_train, y_test = train_test_split(data_x, data_y, test_size=test_size)
+        return x_train, x_test, y_train, y_test
     else:
-        x_train, x_test, y_train, y_test = train_test_split(df, test_size=test_size)
-
-    return x_train, x_test, y_train, y_test
+        x_train, x_test = train_test_split(df, test_size=test_size)
+        return x_train, x_test
